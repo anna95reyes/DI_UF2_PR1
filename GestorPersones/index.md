@@ -1,4 +1,4 @@
 
 # **DIAGRAMA DE CLASSES**
 
->![Diagrama de classes](./Assets/DiagramaDeClasses.png)
+>![Diagrama de classes](~/images/DiagramaDeClasses.png)

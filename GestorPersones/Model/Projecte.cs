@@ -53,11 +53,17 @@ namespace GestorPersones
         private List<Empleat> mEmpleats;
         public void AddEmpleat(Empleat nou)
         {
+            if (mEmpleats == null)
+            {
+                mEmpleats = new List<Empleat>();
+            }
+
             if (!mEmpleats.Contains(nou))
             {
                 mEmpleats.Add(nou);
                 nou.AddProjecte(this);
-            }            
+            }
+                       
         }
 
         public void RemoveEmpleat(Empleat e)

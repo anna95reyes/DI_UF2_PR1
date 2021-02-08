@@ -41,15 +41,17 @@ namespace GestorPersones
         }
 
         /// <summary>
-        ///     Constructor d'un empleat.
+        /// Constructor d'un empleat.
+        ///     
+        /// ## Exemple constructor
+        /// <code language="csharp" region="exempleConstructor" source="..\Model\Empleat.cs"></code>
         /// </summary>
         /// <param name="pEmpresa">Empresa en la que treballa actualment.</param>
         /// <param name="pNom">Nom de l'empleat, es obligatori amb longitud minima de 4 caracters.</param>
         /// <param name="pCognoms">Cognoms de l'empleat, es obligatori amb longitud minima de 4 caracters.</param>
         /// <param name="pNIF">NIF de l'empleat, 8 numeros i 1 lletra.</param>
         /// <param name="pDataIncorporacio">Data d'incorporacio a l'empresa. La data ha de ser superior a la data d'avui.</param>
-        /// 
-        /// <code language="csharp" region="exempleConstructor" source="..\Model\Empleat.cs"></code>
+
         public Empleat(Empresa pEmpresa, String pNom, String pCognoms, String pNIF, DateTime pDataIncorporacio)
         {
             EmpresaActual = pEmpresa;

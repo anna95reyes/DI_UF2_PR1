@@ -46,9 +46,9 @@
                     <RowDefinition Height="117*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <Button x:Name="btnDeleteProj" Width="30" >-</Button>
+                    <Button x:Name="btnDeleteProj" Width="30" Click="btnDeleteProj_Click">-</Button>
                     <ComboBox x:Name="cbProjectes" ItemsSource="{Binding ElementName=wP,Path=EmpleatSeleccionat.ProjectesOnNoTreballo}" DisplayMemberPath="Nom" Margin="30,0,0,0"></ComboBox>
-                    <Button x:Name="btnAddProj" Width="30" Grid.Row="0"  Grid.Column="2"  >+</Button>
+                    <Button x:Name="btnAddProj" Width="30" Grid.Row="0"  Grid.Column="2" Click="btnAddProj_Click">+</Button>
                 </StackPanel>
                 <DataGrid x:Name="dgrProjectes" AutoGenerateColumns="True" ColumnWidth="*" Grid.Row="1"   ItemsSource="{Binding ElementName=wP, Path=EmpleatSeleccionat.ProjectesOnTreballo,Mode=OneWay}" Grid.RowSpan="2"></DataGrid>
 

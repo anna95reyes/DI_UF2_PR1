@@ -51,5 +51,19 @@ namespace GestorPersones.View
             // Treballarem sobre una còpia, amb tota la tranquilitat del món.
             EmpleatSeleccionat = emp.Clonar();
         }
+
+        private void btnDeleteProj_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgrProjectes.SelectedValue != null)
+            {
+                EmpleatSeleccionat.RemoveProjecte((Projecte)dgrProjectes.SelectedValue);
+            }
+            
+        }
+
+        private void btnAddProj_Click(object sender, RoutedEventArgs e)
+        {
+            EmpleatSeleccionat.AddProjecte((Projecte)cbProjectes.SelectedValue);
+        }
     }
 }

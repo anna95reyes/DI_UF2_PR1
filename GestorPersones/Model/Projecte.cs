@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,13 @@ namespace GestorPersones
     {
 
 
-        private static List<Projecte> _projectes;
+        private static ObservableCollection<Projecte> _projectes;
 
-        public static List<Projecte> GetProjectes()
+        public static ObservableCollection<Projecte> GetProjectes()
         {
             if (_projectes == null)
             {
-                _projectes = new List<Projecte>();
+                _projectes = new ObservableCollection<Projecte>();
 
 
                 _projectes.Add(new Projecte(1, "A"));
@@ -50,12 +51,23 @@ namespace GestorPersones
         }
 
 
-        private List<Empleat> mEmpleats;
+        private ObservableCollection<Empleat> mEmpleats;
         public void AddEmpleat(Empleat nou)
         {
             if (mEmpleats == null)
             {
-                mEmpleats = new List<Empleat>();
+                mEmpleats = new ObservableCollection<Empleat>();
+
+                if (_projectes[0] != null)
+                {
+                    mEmpleats.Add(Empleat.GetEmpleats()[0]);
+                    mEmpleats.Add(Empleat.GetEmpleats()[1]);
+                }
+                if (_projectes[1] != null)
+                {
+                    mEmpleats.Add(Empleat.GetEmpleats()[0]);
+                    mEmpleats.Add(Empleat.GetEmpleats()[2]);
+                }
             }
 
             if (!mEmpleats.Contains(nou))
@@ -71,11 +83,11 @@ namespace GestorPersones
             if (mEmpleats.Contains(e))
             {
                 mEmpleats.Remove(e);
-               e.RemoveProjecte(this);
+                e.RemoveProjecte(this);
             }
         }
 
-        public List<Empleat>.Enumerator GetEmpleats()
+        public IEnumerator<Empleat> GetEmpleats()
         {
             return mEmpleats.GetEnumerator();
         }

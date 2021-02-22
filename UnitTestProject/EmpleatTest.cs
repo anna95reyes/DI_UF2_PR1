@@ -4,6 +4,7 @@ using GestorPersones;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace UnitTestProject
 {
@@ -151,10 +152,10 @@ namespace UnitTestProject
         }
 
         /*
-/// <param name="pNIF">NIF de l'empleat, 8 numeros i 1 lletra.</param>
-/// <param name="pDataIncorporacio">Data d'incorporacio a l'empresa. La data ha de ser superior a la data d'avui.</param>
+        /// <param name="pNIF">NIF de l'empleat, 8 numeros i 1 lletra.</param>
+        /// <param name="pDataIncorporacio">Data d'incorporacio a l'empresa. La data ha de ser superior a la data d'avui.</param>
 
-*/
+        */
 
         [TestMethod]
         public void TestConstructorDataIncorporacioIncorrecte()
@@ -179,14 +180,14 @@ namespace UnitTestProject
         [TestMethod]
         public void TestGetEmpleats()
         {
-            List<Empleat> empleats = Empleat.GetEmpleats();
+            ObservableCollection<Empleat> empleats = Empleat.GetEmpleats();
             Assert.AreEqual(empleats, Empleat.GetEmpleats());
         }
 
         [TestMethod]
         public void TestProjectes()
         {
-            List<Projecte> projectes = Projecte.GetProjectes();
+            ObservableCollection<Projecte> projectes = Projecte.GetProjectes();
             Empresa emp = new Empresa("Milà i Fontanals");
             DateTime d = new DateTime();
             d.AddDays(1);
@@ -194,7 +195,7 @@ namespace UnitTestProject
             e.AddProjecte(projectes[0]);
 
             Debug.Write(e.GetProjectes());
-            List<Projecte>.Enumerator en = e.GetProjectes();
+            IEnumerator<Projecte> en = e.GetProjectes();
             int pc = 0;
             Projecte p;
             while (en.MoveNext())
@@ -204,7 +205,7 @@ namespace UnitTestProject
                 pc++;
             }
             Assert.AreEqual(1, pc);
-            List<Projecte> projecteOnTreballo = new List<Projecte>();
+            ObservableCollection<Projecte> projecteOnTreballo = new ObservableCollection<Projecte>();
             projecteOnTreballo.Add(projectes[0]);
             // comparació de les llistes comparant item per item amb Equals()
             Assert.IsTrue(projecteOnTreballo.SequenceEqual(e.ProjectesOnTreballo));
@@ -214,15 +215,15 @@ namespace UnitTestProject
         [TestMethod]
         public void TestAddProjectes()
         {
-            List<Projecte> projectes = Projecte.GetProjectes();
+            ObservableCollection<Projecte> projectes = Projecte.GetProjectes();
             Empresa emp = new Empresa("Milà i Fontanals");
             DateTime d = new DateTime();
             d.AddDays(1);
             Empleat e = new Empleat(emp, "Anna Maria", "Reyes Bello", "47112681X", d);
             e.AddProjecte(projectes[0]);
             e.AddProjecte(projectes[1]);
-            
-            List<Projecte>.Enumerator en = e.GetProjectes();
+
+            IEnumerator<Projecte> en = e.GetProjectes();
             int pc = 0;
             Projecte p;
             while (en.MoveNext())
@@ -238,8 +239,8 @@ namespace UnitTestProject
         public void TestRemoveProjectes()
         {
             Empleat e = Empleat.GetEmpleats()[0];
-            List<Projecte> projecteOnTreballo = new List<Projecte>();
-            List<Projecte>.Enumerator en = e.GetProjectes();
+            ObservableCollection<Projecte> projecteOnTreballo = new ObservableCollection<Projecte>();
+            IEnumerator<Projecte> en = e.GetProjectes();
             int i = 0;
             while (en.MoveNext())
             {

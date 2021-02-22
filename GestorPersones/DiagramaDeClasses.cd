@@ -3,7 +3,7 @@
   <Class Name="GestorPersones.Empresa">
     <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAUAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Empresa.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,9 +17,10 @@
   <Class Name="GestorPersones.Empleat">
     <Position X="5.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIATAAAEgAgAAGRgBEBAAAAACAIAhAAQABAIAEAAAI=</HashCode>
+      <HashCode>AAIATAAAEgAgAAGRgBEBIAAAgCAIAhAAQABAIAEAAAI=</HashCode>
       <FileName>Model\Empleat.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

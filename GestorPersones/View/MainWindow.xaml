@@ -36,10 +36,10 @@
             <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">Data entrada:</TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center">Projectes:</TextBlock>
 
-            <TextBox x:Name="txbNIF" Margin="5"  Grid.Column="1" Grid.Row="0" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.NIF,Mode=OneWay}" ></TextBox>
-            <TextBox x:Name="txbNom" Margin="5"  Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.Nom,Mode=OneWay}" ></TextBox>
-            <TextBox x:Name="txbCognoms" Margin="5"   Grid.Column="1" Grid.Row="2" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.Cognoms,Mode=OneWay}" ></TextBox>
-            <DatePicker x:Name="dtpData" Margin="5"   Grid.Column="1" Grid.Row="3"  SelectedDate="{Binding ElementName=wP,Path=EmpleatSeleccionat.DataIncorporacio,Mode=OneWay}"></DatePicker>
+            <TextBox x:Name="txbNIF" Margin="5"  Grid.Column="1" Grid.Row="0" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.NIF,Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txbNIF_TextChanged"></TextBox>
+            <TextBox x:Name="txbNom" Margin="5"  Grid.Column="1" Grid.Row="1" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.Nom,Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txbNom_TextChanged"></TextBox>
+            <TextBox x:Name="txbCognoms" Margin="5"   Grid.Column="1" Grid.Row="2" Text="{Binding ElementName=wP,Path=EmpleatSeleccionat.Cognoms,Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txbCognoms_TextChanged"></TextBox>
+            <DatePicker x:Name="dtpData" Margin="5"   Grid.Column="1" Grid.Row="3"  SelectedDate="{Binding ElementName=wP,Path=EmpleatSeleccionat.DataIncorporacio,Mode=TwoWay, UpdateSourceTrigger=Explicit}" SelectedDateChanged="dtpData_SelectedDateChanged"></DatePicker>
             <Grid Margin="5"  Grid.Column="1" Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="22*"/>
@@ -47,10 +47,12 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <Button x:Name="btnDeleteProj" Width="30" Click="btnDeleteProj_Click">-</Button>
-                    <ComboBox x:Name="cbProjectes" ItemsSource="{Binding ElementName=wP,Path=EmpleatSeleccionat.ProjectesOnNoTreballo}" DisplayMemberPath="Nom" Margin="30,0,0,0"></ComboBox>
+                    <ComboBox x:Name="cbProjectes" ItemsSource="{Binding ElementName=wP,Path=EmpleatSeleccionat.ProjectesOnNoTreballo}" DisplayMemberPath="Nom" Margin="30,0,0,0"
+                              SelectionChanged="cbProjectes_SelectionChanged"></ComboBox>
                     <Button x:Name="btnAddProj" Width="30" Grid.Row="0"  Grid.Column="2" Click="btnAddProj_Click">+</Button>
                 </StackPanel>
-                <DataGrid x:Name="dgrProjectes" AutoGenerateColumns="True" ColumnWidth="*" Grid.Row="1"   ItemsSource="{Binding ElementName=wP, Path=EmpleatSeleccionat.ProjectesOnTreballo,Mode=OneWay}" Grid.RowSpan="2"></DataGrid>
+                <DataGrid x:Name="dgrProjectes" AutoGenerateColumns="True" ColumnWidth="*" Grid.Row="1"   ItemsSource="{Binding ElementName=wP, Path=EmpleatSeleccionat.ProjectesOnTreballo,Mode=OneWay}" Grid.RowSpan="2"
+                          SelectionChanged="dgrProjectes_SelectionChanged"></DataGrid>
 
 
             </Grid>
@@ -64,9 +66,9 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="btnDelete" Grid.Row="0"  Margin="10">Delete</Button>
-                <Button x:Name="btnCancel" Grid.Row="0" Grid.Column="1" Margin="10">Cancel</Button>
-                <Button x:Name="btnSave" Grid.Row="0"  Grid.Column="2" Margin="10">Save</Button>
+                <Button x:Name="btnDelete" Grid.Row="0"  Margin="10" Click="btnDelete_Click">Delete</Button>
+                <Button x:Name="btnCancel" Grid.Row="0" Grid.Column="1" Margin="10" Click="btnCancel_Click">Cancel</Button>
+                <Button x:Name="btnSave" Grid.Row="0"  Grid.Column="2" Margin="10" Click="btnSave_Click">Save</Button>
             </Grid>
         </Grid>
     </Grid>

@@ -175,6 +175,25 @@ references:
   isSpec: "True"
   fullName: GestorPersones.Empleat.ProjectesOnTreballo
   nameWithType: Empleat.ProjectesOnTreballo
+- uid: GestorPersones.Empleat.PropertyChanged
+  name: PropertyChanged
+  href: api/GestorPersones.Empleat.html#GestorPersones_Empleat_PropertyChanged
+  commentId: E:GestorPersones.Empleat.PropertyChanged
+  fullName: GestorPersones.Empleat.PropertyChanged
+  nameWithType: Empleat.PropertyChanged
+- uid: GestorPersones.Empleat.RaisePropertyChange(System.String)
+  name: RaisePropertyChange(String)
+  href: api/GestorPersones.Empleat.html#GestorPersones_Empleat_RaisePropertyChange_System_String_
+  commentId: M:GestorPersones.Empleat.RaisePropertyChange(System.String)
+  fullName: GestorPersones.Empleat.RaisePropertyChange(System.String)
+  nameWithType: Empleat.RaisePropertyChange(String)
+- uid: GestorPersones.Empleat.RaisePropertyChange*
+  name: RaisePropertyChange
+  href: api/GestorPersones.Empleat.html#GestorPersones_Empleat_RaisePropertyChange_
+  commentId: Overload:GestorPersones.Empleat.RaisePropertyChange
+  isSpec: "True"
+  fullName: GestorPersones.Empleat.RaisePropertyChange
+  nameWithType: Empleat.RaisePropertyChange
 - uid: GestorPersones.Empleat.RemoveProjecte(GestorPersones.Projecte)
   name: RemoveProjecte(Projecte)
   href: api/GestorPersones.Empleat.html#GestorPersones_Empleat_RemoveProjecte_GestorPersones_Projecte_

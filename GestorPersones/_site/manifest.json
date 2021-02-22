@@ -80,10 +80,10 @@
       "output": {
         ".html": {
           "relative_path": "api/GestorPersones.Empleat.html",
-          "hash": "utYkGPCqQR2K2ypFUiiIIg=="
+          "hash": "UHRWfwI686mmrcIELynC2Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -104,10 +104,10 @@
       "output": {
         ".html": {
           "relative_path": "api/GestorPersones.Projecte.html",
-          "hash": "xGGvcSvknka8V96mZWN2pw=="
+          "hash": "gwp5/I1F0R4X2HnAi7uH8w=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -116,7 +116,7 @@
       "output": {
         ".html": {
           "relative_path": "api/GestorPersones.View.MainWindow.html",
-          "hash": "28h31seur4ttgsSa+NiLkw=="
+          "hash": "PILMj7IzRUSk9v8LMOML4Q=="
         }
       },
       "is_incremental": true,
@@ -143,7 +143,7 @@
           "hash": "G/1YP3jxJFSnsJnqFFtymA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -190,7 +190,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 7,
-          "skipped_file_count": 6
+          "skipped_file_count": 7
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

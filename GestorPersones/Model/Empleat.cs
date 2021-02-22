@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GestorPersones
 {
-    public class Empleat
+    public class Empleat : INotifyPropertyChanged
     {
-        private static List<Empleat> _empleats;
+        private static ObservableCollection<Empleat> _empleats;
 
         /// <summary>
         ///     #Llistat Empleats
@@ -17,11 +21,11 @@ namespace GestorPersones
         /// <returns>
         ///     Llista d'empleats.
         /// </returns>
-        public static List<Empleat> GetEmpleats()
+        public static ObservableCollection<Empleat> GetEmpleats()
         {
             if (_empleats == null)
             {
-                _empleats = new List<Empleat>();
+                _empleats = new ObservableCollection<Empleat>();
                 Empresa empresa = new Empresa("IES Milà");
                 DateTime hora = DateTime.Now;
                 hora = hora.AddDays(1);
@@ -59,7 +63,7 @@ namespace GestorPersones
             Cognoms = pCognoms;
             NIF = pNIF;
             DataIncorporacio = pDataIncorporacio;
-            mProjectesOnTreballo = new List<Projecte>();
+            mProjectesOnTreballo = new ObservableCollection<Projecte>();
         }
 
         private Empresa mEmpresaActual;
@@ -78,6 +82,7 @@ namespace GestorPersones
             {
                 if (!validaNomICognoms(value)) throw new Exception("El nom es obligatori i minim de 4 caràcters.");
                 mNom = value;
+                RaisePropertyChange();
             }
         }
 
@@ -94,6 +99,7 @@ namespace GestorPersones
             {
                 if (!validaNomICognoms(value)) throw new Exception("El cognom es obligatori i minim de 4 caràcters.");
                 mCognoms = value;
+                RaisePropertyChange();
             }
         }
 
@@ -110,15 +116,16 @@ namespace GestorPersones
             {
                 if (!validaNif(value)) throw new Exception("Format del NIF incorrecte.");
                 mNIF = value;
+                RaisePropertyChange();
             }
         }
 
-        private List<Projecte> mProjectesOnTreballo;
+        private ObservableCollection<Projecte> mProjectesOnTreballo;
 
         /// <summary>
         /// Llista dels Projectes on treballa l'empleat
         /// </summary>
-        public List<Projecte> ProjectesOnTreballo
+        public ObservableCollection<Projecte> ProjectesOnTreballo
         {
             get { return mProjectesOnTreballo; }
         }
@@ -126,13 +133,27 @@ namespace GestorPersones
         /// <summary>
         /// Llista dels Projectes on no treballa l'empleat
         /// </summary>
-        public List<Projecte> ProjectesOnNoTreballo
+        public ObservableCollection<Projecte> ProjectesOnNoTreballo
         {
             get
             {
-                List<Projecte> all = new List<Projecte>();
-                all.AddRange(Projecte.GetProjectes());
-                all.RemoveAll(p => mProjectesOnTreballo.Contains(p));
+                ObservableCollection<Projecte> all = new ObservableCollection<Projecte>();
+                for (int i = 0; i < Projecte.GetProjectes().Count; i++)
+                {
+                    all.Add(Projecte.GetProjectes()[i]);
+                }
+                for (int i = 0; i < mProjectesOnTreballo.Count; i++)
+                {
+                    if (all.Contains(mProjectesOnTreballo[i]))
+                    {
+                        all.Remove(mProjectesOnTreballo[i]);
+                    }
+                    
+                }
+
+                
+                //all.AddRange(Projecte.GetProjectes());
+                //all.RemoveAll(p => mProjectesOnTreballo.Contains(p));
                 return all;
             }
 
@@ -142,9 +163,10 @@ namespace GestorPersones
         /// Numero de projectes assignats.
         /// </summary>
         /// <returns></returns>
-        public List<Projecte>.Enumerator GetProjectes()
+        public IEnumerator<Projecte> GetProjectes()
         {
-            return mProjectesOnTreballo.GetEnumerator();
+            IEnumerable<Projecte> e = (IEnumerable<Projecte>)mProjectesOnTreballo;
+            return e.GetEnumerator();
         }
 
         /// <summary>
@@ -156,6 +178,8 @@ namespace GestorPersones
             if (!mProjectesOnTreballo.Contains(p))
             {
                 mProjectesOnTreballo.Add(p);
+                p.AddEmpleat(this);
+                RaisePropertyChange();
             }
         }
 
@@ -184,6 +208,7 @@ namespace GestorPersones
             {
                 validaDataEntrada(value);
                 mDataIncorporacio = value;
+                RaisePropertyChange();
             }
         }
 
@@ -203,7 +228,7 @@ namespace GestorPersones
         /// <returns>
         /// Si no pot llegir una lletra retorna una Excepcio.
         /// </returns>
-        public Boolean validaNif(String data)
+        public static Boolean validaNif(String data)
         {
             if (data == String.Empty)
                 return false;
@@ -225,7 +250,7 @@ namespace GestorPersones
             }
             return true;
         }
-        private String getLetra(int id)
+        private static String getLetra(int id)
         {
             Dictionary<int, String> letras = new Dictionary<int, String>();
             letras.Add(0, "T");
@@ -259,7 +284,7 @@ namespace GestorPersones
         /// </summary>
         /// <param name="text">El nom o Cognom</param>
         /// <returns>Retorna fals si el Nom o el Cognom no son correctes.</returns>
-        public Boolean validaNomICognoms(String text)
+        public static Boolean validaNomICognoms(String text)
         {
             return text.Trim().Length >= 4;
         }
@@ -269,7 +294,7 @@ namespace GestorPersones
         /// </summary>
         /// <param name="data">Data de la incorporació.</param>
         /// <returns>Retorna fals si la data no es valida.</returns>
-        public Boolean validaDataEntrada(DateTime data)
+        public static Boolean validaDataEntrada(DateTime data)
         {
             return data > DateTime.Now;
         }
@@ -286,7 +311,7 @@ namespace GestorPersones
                 return ((Empleat)o).NIF.Equals(this.NIF);
             }
             return false;
-        }
+        } 
 
         internal Empleat Clonar()
         {
@@ -294,7 +319,12 @@ namespace GestorPersones
 
             // ens assegurem de clonar també la llista de projectes....
             // així no la liem !
-            e.mProjectesOnTreballo.AddRange(this.mProjectesOnTreballo);
+            //e.mProjectesOnTreballo.AddRange(this.mProjectesOnTreballo);
+            // reemplaçar per un for
+            for (int i = 0; i < mProjectesOnTreballo.Count; i++)
+            {
+                e.mProjectesOnTreballo.Add(mProjectesOnTreballo[i]);
+            }
 
             return e;
 
@@ -309,5 +339,11 @@ namespace GestorPersones
             Empleat e = new Empleat(empresa, "Anna Mª", "Reyes Bello", "47112681X", dataIncorporacio);
         }
         #endregion exempleConstructor
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChange([CallerMemberName] string propertyname = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
+        }
     }
 }
